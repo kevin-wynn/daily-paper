@@ -2,14 +2,13 @@
   "name": "sunday-paper",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "run-p dev:*",
-    "dev:wrangler": "wrangler pages dev dist --live-reload",
-    "dev:esbuild": "esbuild --bundle src/server.ts --format=esm --watch --outfile=dist/_worker.js",
-    "build": "esbuild --bundle src/server.ts --format=esm --outfile=dist/_worker.js",
+    "dev:wrangler": "wrangler pages dev dist --live-reload --compatibility-date=2023-08-04",
+    "dev:esbuild": "esbuild --bundle src/app.tsx --format=esm --watch --outfile=dist/_worker.js",
+    "build": "esbuild --bundle src/app.tsx --format=esm --outfile=dist/_worker.js",
     "deploy": "wrangler pages publish dist"
-},
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kevin-wynn/sunday-paper.git"
@@ -21,7 +20,8 @@
   },
   "homepage": "https://github.com/kevin-wynn/sunday-paper#readme",
   "dependencies": {
-    "hono": "^3.3.4"
+    "hono": "^3.3.4",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "esbuild": "^0.18.17",
