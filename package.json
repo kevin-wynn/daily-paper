@@ -1,0 +1,32 @@
+{
+  "name": "sunday-paper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "run-p dev:*",
+    "dev:wrangler": "wrangler pages dev dist --live-reload",
+    "dev:esbuild": "esbuild --bundle src/server.ts --format=esm --watch --outfile=dist/_worker.js",
+    "build": "esbuild --bundle src/server.ts --format=esm --outfile=dist/_worker.js",
+    "deploy": "wrangler pages publish dist"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevin-wynn/sunday-paper.git"
+  },
+  "author": "Kevin Wynn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevin-wynn/sunday-paper/issues"
+  },
+  "homepage": "https://github.com/kevin-wynn/sunday-paper#readme",
+  "dependencies": {
+    "hono": "^3.3.4"
+  },
+  "devDependencies": {
+    "esbuild": "^0.18.17",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.1.6",
+    "wrangler": "^3.4.0"
+  }
+}
