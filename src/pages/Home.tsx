@@ -16,7 +16,7 @@ export const Home = ({ news }: { news: Object }) => {
         const items = JSON.parse(json).rss.channel.item;
 
         return (
-          <div className="h-screen bg-purple-400 flex items-center justify-center">
+          <div className="bg-red-500">
             <h2>{newsXML}</h2>
             {items.map((newsItem: any) => (
               <div>

@@ -2,7 +2,9 @@ export const Layout = ({ children }: { children: any }) => {
   return (
     <html>
       <head>
-        <script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="/output.css" rel="stylesheet" />
       </head>
       <body>{children}</body>
     </html>

@@ -5931,7 +5931,11 @@ function jsxDEV(tag, props) {
 // src/components/Layout.tsx
 var Layout = ({ children }) => {
   return /* @__PURE__ */ jsxDEV("html", { children: [
-    /* @__PURE__ */ jsxDEV("head", { children: /* @__PURE__ */ jsxDEV("script", { type: "module", src: "https://cdn.skypack.dev/twind/shim" }) }),
+    /* @__PURE__ */ jsxDEV("head", { children: [
+      /* @__PURE__ */ jsxDEV("meta", { charset: "UTF-8" }),
+      /* @__PURE__ */ jsxDEV("meta", { name: "viewport", content: "width=device-width, initial-scale=1.0" }),
+      /* @__PURE__ */ jsxDEV("link", { href: "/output.css", rel: "stylesheet" })
+    ] }),
     /* @__PURE__ */ jsxDEV("body", { children })
   ] });
 };
@@ -5947,7 +5951,7 @@ var Home = ({ news }) => {
         compact: true
       });
       const items = JSON.parse(json).rss.channel.item;
-      return /* @__PURE__ */ jsxDEV("div", { className: "h-screen bg-purple-400 flex items-center justify-center", children: [
+      return /* @__PURE__ */ jsxDEV("div", { className: "bg-red-500", children: [
         /* @__PURE__ */ jsxDEV("h2", { children: newsXML }),
         items.map((newsItem) => /* @__PURE__ */ jsxDEV("div", { children: /* @__PURE__ */ jsxDEV("a", { href: newsItem.link._text, target: "_blank", children: [
           /* @__PURE__ */ jsxDEV("h3", { children: [
