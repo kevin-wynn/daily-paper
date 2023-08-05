@@ -6,9 +6,7 @@ import { newsFeedURLs } from "./helpers/newsHelper";
 const app = new Hono();
 
 app.get("/public/*", async (ctx: Context) => {
-  console.log("assets fetch:", ctx.env.ASSETS.fetch(ctx.req));
-  console.log("ctx req:", ctx.req);
-  return await ctx.env.ASSETS.fetch(ctx.req);
+  return await ctx.env.ASSETS.fetch(ctx.req.url);
 });
 
 app.get("/", async (ctx) => {

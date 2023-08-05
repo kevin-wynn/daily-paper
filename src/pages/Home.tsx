@@ -7,7 +7,7 @@ const app = new Hono();
 export const Home = ({ news }: { news: Object }) => {
   return (
     <Layout>
-      <h1>Hello Hono!</h1>
+      <h1 className="font-serif text-5xl">Daily Paper</h1>
       {Object.keys(news).map((newsXML: any) => {
         const json = convert.xml2json((news as any)[newsXML], {
           compact: true,

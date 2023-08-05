@@ -5945,7 +5945,7 @@ var import_xml_js = __toESM(require_lib());
 var app = new Hono2();
 var Home = ({ news }) => {
   return /* @__PURE__ */ jsxDEV(Layout, { children: [
-    /* @__PURE__ */ jsxDEV("h1", { children: "Hello Hono!" }),
+    /* @__PURE__ */ jsxDEV("h1", { className: "font-serif text-5xl", children: "Daily Paper" }),
     Object.keys(news).map((newsXML) => {
       const json = import_xml_js.default.xml2json(news[newsXML], {
         compact: true
@@ -5987,7 +5987,7 @@ var newsFeedURLs = {
 // src/app.tsx
 var app2 = new Hono2();
 app2.get("/public/*", async (ctx) => {
-  return await ctx.env.ASSETS.fetch(ctx.req);
+  return await ctx.env.ASSETS.fetch(ctx.req.url);
 });
 app2.get("/", async (ctx) => {
   let news = {};
