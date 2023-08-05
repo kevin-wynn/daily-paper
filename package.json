@@ -6,8 +6,8 @@
     "dev": "run-p dev:*",
     "dev:wrangler": "wrangler pages dev dist --live-reload --compatibility-date=2023-08-04",
     "dev:esbuild": "esbuild --bundle src/app.tsx --format=esm --watch --outfile=dist/_worker.js",
-    "dev:tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css && esbuild --bundle src/app.tsx --format=esm --outfile=dist/_worker.js",
+    "dev:tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/public/output.css --watch",
+    "build": "npx tailwindcss -i ./src/input.css -o ./dist/public/output.css && esbuild --bundle src/app.tsx --format=esm --outfile=dist/_worker.js",
     "deploy": "wrangler pages publish dist"
   },
   "repository": {

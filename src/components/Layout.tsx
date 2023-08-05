@@ -4,7 +4,7 @@ export const Layout = ({ children }: { children: any }) => {
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="/output.css" rel="stylesheet" />
+        <link href="/public/output.css" rel="stylesheet" />
       </head>
       <body>{children}</body>
     </html>

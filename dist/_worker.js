@@ -5934,7 +5934,7 @@ var Layout = ({ children }) => {
     /* @__PURE__ */ jsxDEV("head", { children: [
       /* @__PURE__ */ jsxDEV("meta", { charset: "UTF-8" }),
       /* @__PURE__ */ jsxDEV("meta", { name: "viewport", content: "width=device-width, initial-scale=1.0" }),
-      /* @__PURE__ */ jsxDEV("link", { href: "/output.css", rel: "stylesheet" })
+      /* @__PURE__ */ jsxDEV("link", { href: "/public/output.css", rel: "stylesheet" })
     ] }),
     /* @__PURE__ */ jsxDEV("body", { children })
   ] });
