@@ -5936,7 +5936,7 @@ var Layout = ({ children }) => {
       /* @__PURE__ */ jsxDEV("meta", { name: "viewport", content: "width=device-width, initial-scale=1.0" }),
       /* @__PURE__ */ jsxDEV("link", { href: "/public/output.css", rel: "stylesheet" })
     ] }),
-    /* @__PURE__ */ jsxDEV("body", { children })
+    /* @__PURE__ */ jsxDEV("body", { children: /* @__PURE__ */ jsxDEV("main", { class: "p-6 font-serif", children }) })
   ] });
 };
 
@@ -5945,22 +5945,23 @@ var import_xml_js = __toESM(require_lib());
 var app = new Hono2();
 var Home = ({ news }) => {
   return /* @__PURE__ */ jsxDEV(Layout, { children: [
-    /* @__PURE__ */ jsxDEV("h1", { className: "font-serif text-5xl", children: "Daily Paper" }),
+    /* @__PURE__ */ jsxDEV("h1", { class: "text-9xl underline mb-2", children: "The Daily Paper" }),
+    /* @__PURE__ */ jsxDEV("p", { class: "text-2xl mb-12", children: "Your daily source for aggregated news." }),
     Object.keys(news).map((newsXML) => {
       const json = import_xml_js.default.xml2json(news[newsXML], {
         compact: true
       });
       const items = JSON.parse(json).rss.channel.item;
-      return /* @__PURE__ */ jsxDEV("div", { className: "bg-red-500", children: [
-        /* @__PURE__ */ jsxDEV("h2", { children: newsXML }),
-        items.map((newsItem) => /* @__PURE__ */ jsxDEV("div", { children: /* @__PURE__ */ jsxDEV("a", { href: newsItem.link._text, target: "_blank", children: [
-          /* @__PURE__ */ jsxDEV("h3", { children: [
+      return /* @__PURE__ */ jsxDEV("div", { class: "mb-12", children: [
+        /* @__PURE__ */ jsxDEV("h2", { class: "text-7xl font-bold underline", children: newsXML }),
+        /* @__PURE__ */ jsxDEV("div", { class: "grid gap-6 grid-cols-3", children: items.map((newsItem) => /* @__PURE__ */ jsxDEV("div", { class: "mt-8 hover:bg-slate-200 p-4", children: /* @__PURE__ */ jsxDEV("a", { href: newsItem.link._text, target: "_blank", children: [
+          /* @__PURE__ */ jsxDEV("h3", { class: "text-xl underline", children: [
             newsItem.title._text,
-            " - ",
-            newsItem.pubDate._text
+            " "
           ] }),
-          /* @__PURE__ */ jsxDEV("p", { children: newsItem.description._text })
-        ] }) }))
+          /* @__PURE__ */ jsxDEV("span", { class: "font-thin no-underline", children: newsItem.pubDate._text }),
+          /* @__PURE__ */ jsxDEV("p", { class: "mt-4", children: newsItem.description._text })
+        ] }) })) })
       ] });
     })
   ] });

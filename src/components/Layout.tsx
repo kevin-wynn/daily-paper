@@ -6,7 +6,9 @@ export const Layout = ({ children }: { children: any }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="/public/output.css" rel="stylesheet" />
       </head>
-      <body>{children}</body>
+      <body>
+        <main class="p-6 font-serif">{children}</main>
+      </body>
     </html>
   );
 };
