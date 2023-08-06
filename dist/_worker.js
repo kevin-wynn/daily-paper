@@ -4997,13 +4997,13 @@ var Hono = class extends defineDynamicClass() {
     clone.routes = this.routes;
     return clone;
   }
-  route(path, app3) {
+  route(path, app2) {
     const subApp = this.basePath(path);
-    if (!app3) {
+    if (!app2) {
       return subApp;
     }
-    app3.routes.map((r) => {
-      const handler = app3.errorHandler === errorHandler ? r.handler : async (c, next) => (await compose([r.handler], app3.errorHandler)(c, next)).res;
+    app2.routes.map((r) => {
+      const handler = app2.errorHandler === errorHandler ? r.handler : async (c, next) => (await compose([r.handler], app2.errorHandler)(c, next)).res;
       subApp.addRoute(r.method, r.path, handler);
     });
     return this;
@@ -5932,7 +5932,7 @@ function jsxDEV(tag, props) {
 var Layout = ({ children }) => {
   return /* @__PURE__ */ jsxDEV("html", { children: [
     /* @__PURE__ */ jsxDEV("head", { children: [
-      /* @__PURE__ */ jsxDEV("meta", { charset: "UTF-8" }),
+      /* @__PURE__ */ jsxDEV("meta", { charSet: "UTF-8" }),
       /* @__PURE__ */ jsxDEV("meta", { name: "viewport", content: "width=device-width, initial-scale=1.0" }),
       /* @__PURE__ */ jsxDEV("link", { href: "/public/output.css", rel: "stylesheet" })
     ] }),
@@ -5942,19 +5942,18 @@ var Layout = ({ children }) => {
 
 // src/pages/Home.tsx
 var import_xml_js = __toESM(require_lib());
-var app = new Hono2();
 var Home = ({ news }) => {
   return /* @__PURE__ */ jsxDEV(Layout, { children: [
-    /* @__PURE__ */ jsxDEV("h1", { class: "text-9xl underline mb-2", children: "The Daily Paper" }),
-    /* @__PURE__ */ jsxDEV("p", { class: "text-2xl mb-12", children: "Your daily source for aggregated news." }),
+    /* @__PURE__ */ jsxDEV("h1", { class: "text-5xl md:text-9xl underline mb-2", children: "The Daily Paper" }),
+    /* @__PURE__ */ jsxDEV("p", { class: "text-xl md:text-2xl mb-12", children: "Your daily source for aggregated news." }),
     Object.keys(news).map((newsXML) => {
       const json = import_xml_js.default.xml2json(news[newsXML], {
         compact: true
       });
       const items = JSON.parse(json).rss.channel.item;
       return /* @__PURE__ */ jsxDEV("div", { class: "mb-12", children: [
-        /* @__PURE__ */ jsxDEV("h2", { class: "text-7xl font-bold underline", children: newsXML }),
-        /* @__PURE__ */ jsxDEV("div", { class: "grid gap-6 grid-cols-3", children: items.map((newsItem) => /* @__PURE__ */ jsxDEV("div", { class: "mt-8 hover:bg-slate-200 p-4", children: /* @__PURE__ */ jsxDEV("a", { href: newsItem.link._text, target: "_blank", children: [
+        /* @__PURE__ */ jsxDEV("div", { class: "flex flex-row items-center", children: /* @__PURE__ */ jsxDEV("h2", { class: "text-3xl md:text-7xl font-bold mr-4 bg-orange-500 p-2 underline", children: newsXML }) }),
+        /* @__PURE__ */ jsxDEV("div", { class: "grid md:gap-6 grid-cols-1 md:grid-cols-3", children: items.map((newsItem) => /* @__PURE__ */ jsxDEV("div", { class: "mt-8 hover:bg-slate-200 p-4", children: /* @__PURE__ */ jsxDEV("a", { href: newsItem.link._text, target: "_blank", children: [
           /* @__PURE__ */ jsxDEV("h3", { class: "text-xl underline", children: [
             newsItem.title._text,
             " "
@@ -5986,11 +5985,11 @@ var newsFeedURLs = {
 };
 
 // src/app.tsx
-var app2 = new Hono2();
-app2.get("/public/*", async (ctx) => {
+var app = new Hono2();
+app.get("/public/*", async (ctx) => {
   return await ctx.env.ASSETS.fetch(ctx.req.url);
 });
-app2.get("/", async (ctx) => {
+app.get("/", async (ctx) => {
   let news = {};
   for (const key in newsFeedURLs) {
     if (newsFeedURLs.hasOwnProperty(key)) {
@@ -6001,7 +6000,7 @@ app2.get("/", async (ctx) => {
   }
   return ctx.html(/* @__PURE__ */ jsxDEV(Home, { news }));
 });
-var app_default = app2;
+var app_default = app;
 export {
   app_default as default
 };

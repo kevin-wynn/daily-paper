@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/kevin-wynn/sunday-paper#readme",
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "@hono/node-server": "^1.1.1",
     "esbuild": "^0.18.17",
     "hono": "^3.3.4",
