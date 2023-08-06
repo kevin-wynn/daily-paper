@@ -35,7 +35,9 @@ export const NewsSourceList = ({
             class="hover:bg-slate-200 p-4 mt-8"
           >
             <h3 class="text-xl underline">{newsItem.title._text} </h3>
-            <span class="font-thin no-underline">{newsItem.pubDate._text}</span>
+            <span class="font-thin no-underline">
+              {new Date(newsItem.pubDate._text).toLocaleString()}
+            </span>
             <p class="mt-4">{newsItem.description._text}</p>
           </a>
         ))}
