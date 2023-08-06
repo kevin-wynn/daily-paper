@@ -27,7 +27,7 @@ export const CollapseButton = ({ newsXML }: { newsXML: string }) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          class="w-14 h-14"
+          class="w-8 h-8 md:w-14 md:h-14"
         >
           <path
             strokeLinecap="round"
