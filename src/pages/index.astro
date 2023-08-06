@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+import convert from "xml-js";
+import { newsFeedURLs } from "../helpers/newsHelper";
+import { getRSSNews } from "../api/news";
+import { NewsSourceList } from "../components/NewsSourceList";
+
+export const prerender = true;
+
+let news = {};
+for (const key in newsFeedURLs) {
+  if (newsFeedURLs.hasOwnProperty(key)) {
+    const url: string = (newsFeedURLs as any)[key];
+    const newsText = await getRSSNews(url);
+    (news as any)[key] = newsText;
+  }
+}
+---
+
+<Layout title="The Daily Paper">
+  <main>
+    <h1 class="text-5xl md:text-9xl underline mb-2">The Daily Paper</h1>
+    <p class="text-xl md:text-3xl mb-12">
+      Your daily source for aggregated news.
+    </p>
+    {
+      Object.keys(news).map((newsXML: any) => {
+        const json = convert.xml2json((news as any)[newsXML], {
+          compact: true,
+        });
+
+        const items = JSON.parse(json).rss.channel.item;
+
+        return <NewsSourceList items={items} newsXML={newsXML} client:load />;
+      })
+    }
+  </main>
+</Layout>
