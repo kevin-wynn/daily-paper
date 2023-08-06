@@ -4,10 +4,10 @@ import { CollapseButton } from "./CollapseButton";
 
 export const NewsSourceList = ({
   items,
-  newsXML,
+  name,
 }: {
   items: any;
-  newsXML: string;
+  name: string;
 }) => {
   const $collapsedItems = useStore(collapsedItems);
 
@@ -15,14 +15,14 @@ export const NewsSourceList = ({
     <div class="mb-12">
       <div class="flex flex-row items-center">
         <h2 class="text-3xl md:text-7xl font-bold mr-4 bg-orange-500 text-white p-2 underline">
-          {newsXML}
+          {name}
         </h2>
-        <CollapseButton newsXML={newsXML} />
+        <CollapseButton name={name} />
       </div>
       <div
         class={`grid md:gap-6 grid-cols-1 md:grid-cols-3 ${
           ($collapsedItems as string[]).includes(
-            newsXML.toLowerCase().replaceAll(" ", "_")
+            name.toLowerCase().replaceAll(" ", "_")
           )
             ? "hidden"
             : ""

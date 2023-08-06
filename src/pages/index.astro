@@ -1,20 +1,27 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import convert from "xml-js";
-import { newsFeedURLs } from "../helpers/newsHelper";
+import { newsFeedURLs, NewsSourceType } from "../helpers/newsHelper";
 import { getRSSNews } from "../api/news";
 import { NewsSourceList } from "../components/NewsSourceList";
 
-export const prerender = true;
+// export const prerender = true;
 
-let news = {};
-for (const key in newsFeedURLs) {
-  if (newsFeedURLs.hasOwnProperty(key)) {
-    const url: string = (newsFeedURLs as any)[key];
-    const newsText = await getRSSNews(url);
-    (news as any)[key] = newsText;
-  }
+interface NewsItem extends NewsSourceType {
+  items: string;
 }
+
+let news: NewsItem[] = [];
+
+await Promise.all(
+  newsFeedURLs.map(async (newsSource) => {
+    const newsText = await getRSSNews(newsSource.url);
+    news.push({
+      items: newsText || "",
+      ...newsSource,
+    });
+  })
+);
 ---
 
 <Layout title="The Daily Paper">
@@ -24,14 +31,16 @@ for (const key in newsFeedURLs) {
       Your daily source for aggregated news.
     </p>
     {
-      Object.keys(news).map((newsXML: any) => {
-        const json = convert.xml2json((news as any)[newsXML], {
+      news.map((newsItem: NewsItem) => {
+        const json = convert.xml2json(newsItem.items, {
           compact: true,
         });
 
         const items = JSON.parse(json).rss.channel.item;
 
-        return <NewsSourceList items={items} newsXML={newsXML} client:load />;
+        return (
+          <NewsSourceList items={items} name={newsItem.name} client:load />
+        );
       })
     }
   </main>

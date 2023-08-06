@@ -1,12 +1,12 @@
 import { useStore } from "@nanostores/preact";
 import { collapsedItems } from "../stores/collapsedItemsStore";
 
-export const CollapseButton = ({ newsXML }: { newsXML: string }) => {
+export const CollapseButton = ({ name }: { name: string }) => {
   const $collapsedItems = useStore(collapsedItems);
 
   // todo typings
   const handleClick = (e: any) => {
-    const htmlFriendlyText = newsXML.toLowerCase().replaceAll(" ", "_");
+    const htmlFriendlyText = name.toLowerCase().replaceAll(" ", "_");
     const collapsedItemsCopy: string[] = $collapsedItems;
     collapsedItemsCopy.includes(htmlFriendlyText)
       ? collapsedItemsCopy.splice(
