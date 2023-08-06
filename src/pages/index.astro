@@ -7,7 +7,7 @@ import { NewsSourceList } from "../components/NewsSourceList";
 
 // export const prerender = true;
 
-interface NewsItem extends NewsSourceType {
+export interface NewsItem extends NewsSourceType {
   items: string;
 }
 
@@ -37,9 +37,16 @@ await Promise.all(
         });
 
         const items = JSON.parse(json).rss.channel.item;
+        const lastBuildDate = JSON.parse(json).rss.channel.lastBuildDate._text;
+        items.length = 6;
 
         return (
-          <NewsSourceList items={items} name={newsItem.name} client:load />
+          <NewsSourceList
+            lastBuildDate={lastBuildDate}
+            newsItem={newsItem}
+            items={items}
+            client:load
+          />
         );
       })
     }

@@ -1,29 +1,31 @@
 import { useStore } from "@nanostores/preact";
 import { collapsedItems } from "../stores/collapsedItemsStore";
-import { CollapseButton } from "./CollapseButton";
+import { NewsSourceTitle } from "./NewsSourceTitle";
+import type { NewsItem } from "../pages/index.astro";
 
 export const NewsSourceList = ({
+  newsItem,
   items,
-  name,
+  lastBuildDate,
 }: {
+  newsItem: NewsItem;
   items: any;
-  name: string;
+  lastBuildDate: string;
 }) => {
   const $collapsedItems = useStore(collapsedItems);
+  const htmlFriendlyText = newsItem.name.toLowerCase().replaceAll(" ", "_");
 
   return (
     <div class="mb-12">
-      <div class="flex flex-row items-center">
-        <h2 class="text-3xl md:text-7xl font-bold mr-4 bg-orange-500 text-white p-2 underline">
-          {name}
-        </h2>
-        <CollapseButton name={name} />
-      </div>
+      <NewsSourceTitle
+        name={newsItem.name}
+        source={newsItem.source}
+        sourceURL={newsItem.sourceURL}
+        lastBuildDate={lastBuildDate}
+      />
       <div
         class={`grid md:gap-6 grid-cols-1 md:grid-cols-3 ${
-          ($collapsedItems as string[]).includes(
-            name.toLowerCase().replaceAll(" ", "_")
-          )
+          ($collapsedItems as string[]).includes(htmlFriendlyText)
             ? "hidden"
             : ""
         }`}
