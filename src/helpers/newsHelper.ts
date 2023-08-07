@@ -49,4 +49,11 @@ export const newsFeedURLs: NewsSourceType[] = [
     sourceURL: "https://www.nytimes.com",
     sourceName: "New York Times",
   },
+  {
+    name: "Science",
+    sourceLogo: "NPR.png",
+    url: "https://feeds.npr.org/1007/rss.xml",
+    sourceURL: "https://www.npr.org/",
+    sourceName: "NPR",
+  },
 ];

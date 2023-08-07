@@ -54,7 +54,6 @@ export const NewsSourceFilter = ({
 
   return (
     <div class="flex flex-row mb-12">
-      <span class="text-xl md:text-2xl mr-4">Active News Sources:</span>
       {activeNewsSourceState &&
         activeNewsSourceState.map((source: FilterSourcesType) => (
           <div>
