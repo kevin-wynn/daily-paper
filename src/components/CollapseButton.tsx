@@ -2,11 +2,11 @@ import { useStore } from "@nanostores/preact";
 import { collapsedItems } from "../stores/collapsedItemsStore";
 
 export const CollapseButton = ({ name }: { name: string }) => {
+  const htmlFriendlyText = name.toLowerCase().replaceAll(" ", "_");
   const $collapsedItems = useStore(collapsedItems);
 
   // todo typings
-  const handleClick = (e: any) => {
-    const htmlFriendlyText = name.toLowerCase().replaceAll(" ", "_");
+  const handleClick = () => {
     const collapsedItemsCopy: string[] = $collapsedItems;
     collapsedItemsCopy.includes(htmlFriendlyText)
       ? collapsedItemsCopy.splice(
@@ -27,7 +27,11 @@ export const CollapseButton = ({ name }: { name: string }) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          class="w-8 h-8 md:w-14 md:h-14"
+          class={`w-8 h-8 md:w-14 md:h-14 ${
+            ($collapsedItems as any).includes(htmlFriendlyText)
+              ? "text-blue-500"
+              : ""
+          }`}
         >
           <path
             strokeLinecap="round"

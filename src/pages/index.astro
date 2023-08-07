@@ -4,6 +4,7 @@ import convert from "xml-js";
 import { newsFeedURLs, NewsSourceType } from "../helpers/newsHelper";
 import { getRSSNews } from "../api/news";
 import { NewsSourceList } from "../components/NewsSourceList";
+import { NewsSourceFilter } from "../components/NewsSourceFilter";
 
 // export const prerender = true;
 
@@ -30,6 +31,7 @@ await Promise.all(
     <p class="text-xl md:text-4xl mb-12">
       Your daily source for aggregated news.
     </p>
+    <NewsSourceFilter sources={news} client:load />
     {
       news.map((newsItem: NewsItem) => {
         const json = convert.xml2json(newsItem.items, {
