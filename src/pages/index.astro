@@ -8,11 +8,11 @@ import { NewsSourceFilter } from "../components/NewsSourceFilter";
 
 // export const prerender = true;
 
-export interface NewsItem extends NewsSourceType {
+export interface NewsItemType extends NewsSourceType {
   items: string;
 }
 
-let news: NewsItem[] = [];
+let news: NewsItemType[] = [];
 
 await Promise.all(
   newsFeedURLs.map(async (newsSource) => {
@@ -33,7 +33,7 @@ await Promise.all(
     </p>
     <NewsSourceFilter sources={news} client:load />
     {
-      news.map((newsItem: NewsItem) => {
+      news.map((newsItem: NewsItemType) => {
         const json = convert.xml2json(newsItem.items, {
           compact: true,
         });
