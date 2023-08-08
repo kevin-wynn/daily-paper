@@ -1,21 +1,45 @@
 import { useStore } from "@nanostores/preact";
 import { collapsedItems } from "../stores/collapsedItemsStore";
+import { useEffect } from "preact/hooks";
+
+export type CollapsedItems = {
+  expire: string;
+  collapsedItems: string[];
+};
 
 export const CollapseButton = ({ name }: { name: string }) => {
   const htmlFriendlyText = name.toLowerCase().replaceAll(" ", "_");
   const $collapsedItems = useStore(collapsedItems);
+  useEffect(() => {
+    const collapsedItemsLocalStorage: string | null =
+      localStorage.getItem("collapsedItems");
+    const todaysDate = new Date().getDate();
+    if (collapsedItemsLocalStorage) {
+      const expireDate = new Date(
+        JSON.parse(collapsedItemsLocalStorage).expire
+      ).getDate();
+      if (expireDate < todaysDate || todaysDate === 1) {
+        localStorage.removeItem("collapsedItems");
+      } else {
+        collapsedItems.set(JSON.parse(collapsedItemsLocalStorage));
+      }
+    }
+  }, []);
 
-  // todo typings
   const handleClick = () => {
-    const collapsedItemsCopy: string[] = $collapsedItems;
-    collapsedItemsCopy.includes(htmlFriendlyText)
-      ? collapsedItemsCopy.splice(
-          collapsedItemsCopy.indexOf(htmlFriendlyText),
+    const collapsedItemsCopy: CollapsedItems = $collapsedItems;
+    collapsedItemsCopy.collapsedItems.includes(htmlFriendlyText)
+      ? collapsedItemsCopy.collapsedItems.splice(
+          collapsedItemsCopy.collapsedItems.indexOf(htmlFriendlyText),
           1
         )
-      : collapsedItemsCopy.push(htmlFriendlyText);
-    const uniqueItems: string[] = [...new Set(collapsedItemsCopy)];
-    (collapsedItems as any).set(uniqueItems);
+      : collapsedItemsCopy.collapsedItems.push(htmlFriendlyText);
+    const uniqueItems: CollapsedItems = {
+      expire: new Date().toLocaleString(),
+      collapsedItems: [...new Set(collapsedItemsCopy.collapsedItems)],
+    };
+    collapsedItems.set(uniqueItems);
+    localStorage.setItem("collapsedItems", JSON.stringify(uniqueItems));
   };
 
   return (
@@ -28,7 +52,7 @@ export const CollapseButton = ({ name }: { name: string }) => {
           strokeWidth={1.5}
           stroke="currentColor"
           class={`w-8 h-8 md:w-14 md:h-14 ${
-            ($collapsedItems as any).includes(htmlFriendlyText)
+            $collapsedItems.collapsedItems?.includes(htmlFriendlyText)
               ? "text-blue-500"
               : ""
           }`}

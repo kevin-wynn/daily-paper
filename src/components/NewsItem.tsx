@@ -25,7 +25,7 @@ export const NewsItem = ({
       />
       <div
         class={`grid md:gap-6 grid-cols-1 md:grid-cols-3 ${
-          ($collapsedItems as string[]).includes(htmlFriendlyText)
+          $collapsedItems.collapsedItems?.includes(htmlFriendlyText)
             ? "hidden"
             : ""
         }`}
