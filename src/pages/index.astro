@@ -27,10 +27,6 @@ await Promise.all(
 
 <Layout title="The Daily Paper">
   <main>
-    <h1 class="text-5xl md:text-9xl underline mb-2">The Daily Paper</h1>
-    <p class="text-xl md:text-4xl mb-12">
-      Your daily source for aggregated news.
-    </p>
     <NewsSourceFilter sources={news} client:load />
     {
       news.map((newsItem: NewsItemType) => {
