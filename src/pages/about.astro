@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+import convert from "xml-js";
+import { newsFeedURLs, NewsSourceType } from "../helpers/newsHelper";
+import { getRSSNews } from "../api/news";
+import { NewsSourceList } from "../components/NewsSourceList";
+import { NewsSourceFilter } from "../components/NewsSourceFilter";
+
+export const prerender = true;
+---
+
+<Layout title="The Daily Paper">
+  <main>
+    <h1 class="text-5xl md:text-9xl underline mb-2">The Daily Paper</h1>
+    <p class="text-xl md:text-4xl mb-12">
+      Your daily source for aggregated news.
+    </p>
+    <p class="text-xl md:text-4xl mb-4">What is the Daily Paper?</p>
+    <p class="text-md md:text-2xl mb-12">
+      A small project by <a
+        class="text-blue-500 hover:text-blue-800"
+        href="https://github.com/kevin-wynn/"
+        target="_blank">Kevin Wynn</a
+      > in order to keep an easily digestable, and sane amount, of daily news to
+      read through during the day. Mostly in order to stay up to date on current
+      events. But also as a playground to test new design and development practices.
+      The Daily Paper currently is powered by <a
+        class="text-blue-500 hover:text-blue-800"
+        href="https://astro.build"
+        target="_blank">Astro</a
+      >, <a
+        class="text-blue-500 hover:text-blue-800"
+        target="_blank"
+        href="https://pages.cloudflare.com/">Cloudflare Pages</a
+      >, and RSS feeds tied to various news sources.
+    </p>
+    <p class="text-md md:text-2xl mb-12">
+      I hope you enjoy this small gift. And I hope be able to round out the news
+      sources better over the years.
+    </p>
+  </main>
+</Layout>
