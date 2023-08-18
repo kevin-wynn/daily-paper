@@ -8,6 +8,13 @@ export type NewsSourceType = {
 
 export const newsFeedURLs: NewsSourceType[] = [
   {
+    name: 'Futurism',
+    sourceLogo: 'futurism.jpeg',
+    url: 'https://futurism.com/feed',
+    sourceURL: 'https://futurism.com',
+    sourceName: 'Futurism'
+  }
+  {
     name: "Top News",
     sourceLogo: "AP.png",
     url: "https://apnews.com/hub/ap-top-news.rss",
